@@ -30,13 +30,17 @@ nav {
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.2s;
+    cursor: pointer;
 }
 .nav-links a:hover {
-    color: #f9d342;
+    color: #d18717;
 }
 .nav-separator {
-    height: 3px;
-    background: #f9d342;
+    height: 20px; 
+    background: #2b82df; 
+    border-bottom-left-radius: 50% 100%;
+    border-bottom-right-radius: 50% 100%;
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }

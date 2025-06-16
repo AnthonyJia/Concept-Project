@@ -1,8 +1,20 @@
 <!DOCTYPE html>
+{% load static %}
+<html>
     <head>
-        <title>My Project</title>
+        <title>PortfolioFinder</title>
+        <link rel="stylesheet" href="{% static 'main.css' %}">
     </head>
     <body>
+        <nav>
+            <div class="nav-title">PortfolioFinder</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/accounts/login/">Login</a>
+            </div>
+        </nav>
+        <div class="nav-separator"></div>
         {% block content %}
         {% endblock %}
     </body>

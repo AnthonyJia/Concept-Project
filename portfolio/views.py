@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Profile
 from .forms import ProfileForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -14,7 +15,8 @@ def my_profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect('portfolio-my-profile')  # or use reverse_lazy
+            messages.success(request, "Profile updated successfully!")
+            return redirect('portfolio-home')  # or use reverse_lazy
     else:
         form = ProfileForm(instance=profile, user=request.user)
 

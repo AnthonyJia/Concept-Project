@@ -20,12 +20,12 @@ nav {
     font-weight: bold;
     letter-spacing: 1px;
 }
-.nav-links {
+.nav-links{
     display: flex;
     flex-direction: row;
     gap: 1rem;
 }
-.nav-links a {
+.nav-links a{
     color: #fff;
     text-decoration: none;
     font-size: 1rem;
@@ -44,3 +44,24 @@ nav {
     margin-bottom: 1rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
+
+.logout-button {
+    background: none;
+    border: none;
+    color: #fff; 
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .logout-button:hover,
+  .logout-button:focus {
+    color: #d18717; 
+    outline: none;
+  }
+  

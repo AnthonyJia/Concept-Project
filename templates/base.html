@@ -16,9 +16,14 @@
         <nav>
             <div class="nav-title">PortfolioFinder</div>
             <div class="nav-links">
-                <a href="{% url 'portfolio-home' %}">Home</a>
-                <a href="{% url 'portfolio-my-profile' %}">My Portfolio</a>
-                <a href="/accounts/login/">Login</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'portfolio-home' %}">Home</a>
+                    <a href="{% url 'portfolio-my-profile' %}">My Portfolio</a>
+                    <form action="{% url 'accounts-logout' %}" method="post" style="display:inline; margin-left:1rem;">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                {% endif %}
             </div>
         </nav>
          <div class="nav-separator"></div>

@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from .models import Profile
 from .forms import ProfileForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-
+@login_required
 def home(request):
     return render(request, 'portfolio/home.html')
 
+@login_required
 def my_profile(request):
     profile = Profile.objects.get(user=request.user)
 
@@ -25,6 +26,6 @@ def my_profile(request):
         'profile': profile
     })
     
-
+@login_required
 def detail(request, profile_id):
     return render(request, 'portfolio/detail.html')

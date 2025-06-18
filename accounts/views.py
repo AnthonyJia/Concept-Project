@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
+from django.contrib.auth.views import LogoutView
 from django.contrib import messages
+
+def index_view(request):
+    return render(request, 'accounts/index.html')
 
 def signup_view(request):
     if request.method == 'POST':
@@ -23,9 +27,12 @@ def custom_login_view(request):
             login(request, user)
             messages.success(request, f"Welcome back, {user.username}!")
             return redirect('portfolio-home')
-        else:
-            messages.error(request, "Invalid username or password.")
     else:
         form = AuthenticationForm()
     
     return render(request, 'accounts/login.html', {'form': form})
+
+class CustomLogoutView(LogoutView):
+    def dispatch(self, request, *args, **kwargs):
+        messages.info(request, "You have been logged out.")
+        return super().dispatch(request, *args, **kwargs)

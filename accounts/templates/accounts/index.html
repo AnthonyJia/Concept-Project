@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center bg-light" style="height: 100vh;">
+  <div class="card shadow p-4" style="width: 26rem; border-radius: 1rem;">
+    <h2 class="text-center mb-3" style="font-weight: 600; color: #333;">Welcome to <span style="color: #51bf66;">PortfolioFinder</span></h2>
+    <p class="text-center text-muted" style="font-size: 0.95rem;">
+      A place to showcase your creative work and discover others.
+    </p>
+
+    <div class="mt-4">
+      <p class="text-center fw-medium mb-2">New here?</p>
+      <a href="{% url 'accounts-signup' %}" class="btn btn-success btn-lg w-100 mb-3">Create an Account</a>
+
+      <p class="text-center fw-medium mb-2">Already a member?</p>
+      <a href="{% url 'accounts-login' %}" class="btn btn-outline-primary btn-lg w-100">Log In</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

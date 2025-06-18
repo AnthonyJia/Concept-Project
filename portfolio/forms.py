@@ -22,11 +22,12 @@ class ProfileForm(forms.ModelForm):
         })
     )
     email = forms.EmailField(
-        required=True, 
-        widget=forms.EmailInput(attrs={'class': 'form-control'
+        required=False, 
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Email'
         })
     )
-
 
     class Meta:
         model = Profile
@@ -54,6 +55,12 @@ class ProfileForm(forms.ModelForm):
             self.fields['last_name'].initial = user.last_name
             self.fields['email'].initial = user.email
             self._user = user
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exclude(pk=self._user.pk).exists():
+            raise forms.ValidationError("This email is already in use.")
+        return email
 
     def save(self, commit=True):
         profile = super().save(commit=False)

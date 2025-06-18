@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import Profile
+from .models import Profile, PortfolioLink
 
 User = get_user_model()
 
@@ -39,7 +39,7 @@ class ProfileForm(forms.ModelForm):
                 'rows': 5
             }),
             'creative_fields': forms.SelectMultiple(attrs={
-                'class': 'form-select'
+                'class': 'form-select select2'
             }),
             'profile_pic': forms.ClearableFileInput(attrs={
                 'class': 'form-control'
@@ -75,3 +75,21 @@ class ProfileForm(forms.ModelForm):
                 self._user.email = self.cleaned_data['email']
                 self._user.save()
         return profile
+
+class PortfolioLinkForm(forms.ModelForm):
+    class Meta:
+        model = PortfolioLink
+        fields = ['name', 'url']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Link Name'}),
+            'url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'https://example.com'}),
+        }
+    def clean(self):
+        cleaned_data = super().clean()
+        name = cleaned_data.get("name")
+        url = cleaned_data.get("url")
+
+        if name and not url:
+            raise forms.ValidationError("You must provide a URL if you enter a name.")
+        
+        return cleaned_data

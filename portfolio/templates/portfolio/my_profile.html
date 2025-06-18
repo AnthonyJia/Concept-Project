@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>
-    {% if user.first_name and user.last_name %}
-        {{user.first_name}} {{user.last_name}}'s Profile
-    {% else %}
-        {{user.username}}'s Profile
-    {% endif %}
+    {{user.username}}'s Profile
 </h1>
+
+{% if profile.profile_pic %}
+  <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle profile-pic mb-3">
+{% else %}
+  <img src="/media/profile_pics/default.jpg" alt="Default Profile Picture" class="img-thumbnail profile-pic mb-3">
+{% endif %}
 
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.non_field_errors }}
-  
+
+  <!-- Profile fields -->
   <div class="mb-3">
     <label>First Name</label>
     {{ form.first_name }}
@@ -39,8 +42,23 @@
     <label>Profile Picture</label>
     {{ form.profile_pic }}
   </div>
-  
-  <button type="submit" class="btn btn-primary">Save</button>
+
+  <h4 class="mt-4">Portfolio Links</h4>
+
+  {{ formset.management_form }}
+  {% for link_form in formset %}
+    <div class="border p-3 mb-2">
+      {{ link_form.non_field_errors }}
+      {{ link_form.id }}
+      {{ link_form.name.label_tag }} {{ link_form.name }}
+      {{ link_form.url.label_tag }} {{ link_form.url }}
+      {% if link_form.DELETE %}
+        <label>{{ link_form.DELETE }} Delete</label>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary mt-3">Save</button>
 </form>
 
 {% endblock %}

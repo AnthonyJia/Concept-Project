@@ -192,3 +192,8 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+#Ignore default.jpg
+media/*
+!media/profile_pics/
+!media/profile_pics/default.jpg

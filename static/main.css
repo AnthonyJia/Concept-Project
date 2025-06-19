@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-nav {
+.nav-main {
     background: radial-gradient(circle, #1976d2, #64b5f6);
     color: #0e5f1d;
     padding: 1rem 2rem;
@@ -129,4 +129,24 @@ nav {
   .select2-container--bootstrap4 .select2-selection__choice__remove:hover {
     box-shadow: 0 0 4px rgba(217, 83, 79, 0.5);
   }
+
+.page-link {
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #000;
+}
+
+.page-link:hover {
+    background-color: #333; /* slightly lighter black for hover effect */
+    color: #fff;
+}
+
+/* Active page */
+ul.pagination .page-item.active .page-link {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+    font-weight: 600;
+}
+
   

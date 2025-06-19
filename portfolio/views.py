@@ -4,11 +4,23 @@ from .forms import ProfileForm, PortfolioLinkForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms import modelformset_factory
+from django.core.paginator import Paginator
+
 
 @login_required
 def home(request):
-    return render(request, 'portfolio/home.html')
+    profiles = Profile.objects.select_related('user').prefetch_related('creative_fields', 'portfoliolink_set')
 
+    # Optional: exclude admins or superusers
+    profiles = profiles.exclude(user__is_superuser=True)
+
+    paginator = Paginator(profiles, 6)  # 6 profiles per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'portfolio/home.html', {
+        'page_obj': page_obj
+    })
 
 @login_required
 def my_profile(request):

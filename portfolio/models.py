@@ -7,12 +7,12 @@ User = get_user_model()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(default='default.jpg', upload_to='profile_pics', blank=True)
+    profile_pic = models.ImageField(default='profile_pics/default.jpg', upload_to='profile_pics', blank=True)
     bio = models.TextField(max_length=255, blank=True)
     creative_fields = models.ManyToManyField('CreativeField', blank=True)
 
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}'s Profile"
+        return f"{self.user.username}'s Profile"
 
 class CreativeField(models.Model):
     name = models.CharField(max_length=255)
@@ -22,7 +22,7 @@ class CreativeField(models.Model):
     
 class PortfolioLink(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=25)
     url = models.URLField(max_length=255)
 
     def __str__(self):

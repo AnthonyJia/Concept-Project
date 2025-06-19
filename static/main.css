@@ -149,4 +149,9 @@ ul.pagination .page-item.active .page-link {
     font-weight: 600;
 }
 
+.card:hover {
+    border: 2px solid #28a745;
+    transition: border-color 0.3s ease;
+  }
+
   

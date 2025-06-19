@@ -130,6 +130,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # Login/Logout URLS
-LOGIN_URL = 'login/'
-LOGIN_REDIRECT_URL = 'portfolio/home/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/portfolio/home/'
 LOGOUT_REDIRECT_URL = '/'

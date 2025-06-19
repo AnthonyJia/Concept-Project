@@ -3,52 +3,62 @@
 
 <h2 class="mb-4">Explore Creative Portfolios</h2>
 
+<form method="get" class="mb-4">
+  <div class="input-group" style="max-width: 500px;">
+    <input type="text" name="q" class="form-control" placeholder="Search by name or creative field..." value="{{ query }}">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+</form>
+
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
   {% for profile in page_obj %}
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body d-flex">
-          {% if profile.profile_pic %}
-            <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" class="rounded-circle me-3" style="width: 75px; height: 75px; object-fit: cover;">
-          {% else %}
-            <img src="/media/profile_pics/default.jpg" alt="Default Profile Picture" class="rounded-circle me-3" style="width: 75px; height: 75px; object-fit: cover;">
-          {% endif %}
-          <div class="flex-grow-1">
-            <h5 class="card-title mb-1">
-              {{ profile.user.first_name }} {{ profile.user.last_name }}
-            </h5>
-            <p class="text-muted mb-1">@{{ profile.user.username }}</p>
-            <p class="mb-2"><strong>Bio: </strong>{{ profile.bio|truncatewords:20 }}</p>
-
-            <strong>Creative Fields:</strong>
-            {% if profile.creative_fields.all %}
-              <div class="mb-2">
-                <div class="mt-1">
-                  {% for field in profile.creative_fields.all %}
-                    <span class="badge bg-primary me-1">{{ field.name }}</span>
-                  {% endfor %}
-                </div>
-              </div>
+      <!-- 🟢 Make the entire card clickable -->
+      <a href="{% url 'portfolio-detail' profile.id %}" class="text-decoration-none text-dark">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body d-flex">
+            {% if profile.profile_pic %}
+              <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" class="rounded-circle me-3" style="width: 75px; height: 75px; object-fit: cover;">
+            {% else %}
+              <img src="/media/profile_pics/default.jpg" alt="Default Profile Picture" class="rounded-circle me-3" style="width: 75px; height: 75px; object-fit: cover;">
             {% endif %}
-            
+            <div class="flex-grow-1">
+              <h5 class="card-title mb-1">
+                {{ profile.user.first_name }} {{ profile.user.last_name }}
+              </h5>
+              <p class="text-muted mb-1">@{{ profile.user.username }}</p>
+              <p class="mb-2"><strong>Bio: </strong>{{ profile.bio|truncatewords:20 }}</p>
 
-            {% with profile.portfoliolink_set.all as links %}
-            <div><strong>Portfolio Links:</strong></div>
-              {% if links %}
-                <div>
-                  <ul class="list-unstyled mt-1 mb-0">
-                    {% for link in links %}
-                      <li>
-                        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.name }}</a>
-                      </li>
+              <strong>Creative Fields:</strong>
+              {% if profile.creative_fields.all %}
+                <div class="mb-2">
+                  <div class="mt-1">
+                    {% for field in profile.creative_fields.all %}
+                      <span class="badge bg-primary me-1">{{ field.name }}</span>
                     {% endfor %}
-                  </ul>
+                  </div>
                 </div>
               {% endif %}
-            {% endwith %}
+              
+
+              {% with profile.portfoliolink_set.all as links %}
+              <div><strong>Portfolio Links:</strong></div>
+                {% if links %}
+                  <div>
+                    <ul class="list-unstyled mt-1 mb-0">
+                      {% for link in links %}
+                        <li>
+                          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.name }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+              {% endwith %}
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   {% empty %}
     <p>No profiles found.</p>

@@ -47,7 +47,7 @@
 
   {{ formset.management_form }}
   {% for link_form in formset %}
-    <div class="border p-3 mb-2">
+    <div class="border p-3 mb-2 rounded" style="background-color: #6bb1ee;">
       {{ link_form.non_field_errors }}
       {{ link_form.id }}
       {{ link_form.name.label_tag }} {{ link_form.name }}

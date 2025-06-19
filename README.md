@@ -55,3 +55,25 @@ python manage.py runserver
 ```
 
 ### 6. Visit http://127.0.0.1:8000 in your browser
+
+---
+
+## AI Usage Notes (ChatGPT 4.1)
+
+### What AI helped with
+- Designing the structure of Django models and their relationships
+- Styling profile cards responsibly using Bootstrap
+- Integrating and configuring Select2 for tag selection
+- Writing and debugging template logic for profile card display
+- Building pagination and customizing its appearance
+
+### What AI didn't help with
+- Handling edge cases in form validation
+- Select2 behavior quirks (required additional manual tweaking)
+- Fine-tuning responsiveness for long bios and field overflows
+
+### Example prompts that I used
+- “How do I make a ManyToMany field in Django show as multi-select checkboxes with tags?”
+- “How can I make Bootstrap cards clickable links without wrapping the entire card in an <a> tag?”
+- “Write a custom Django form that saves user info and a related profile model with image upload.”
+
